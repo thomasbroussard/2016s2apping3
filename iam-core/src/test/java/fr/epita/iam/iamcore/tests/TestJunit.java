@@ -15,7 +15,7 @@ import fr.epita.iam.iamlog.IamLogger;
 public class TestJunit {
 	
 	
-	private static final IamLogger logger = IamLogManager.getLogger(TestJunit.class);
+	private static final IamLogger logger = IamLogManager.getIamLogger(TestJunit.class);
 	
 	
 	@Test

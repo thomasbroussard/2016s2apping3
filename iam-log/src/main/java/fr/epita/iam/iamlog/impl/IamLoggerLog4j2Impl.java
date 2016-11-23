@@ -13,7 +13,7 @@ import fr.epita.iam.iamlog.IamLogger;
  * @author tbrou
  *
  */
-public class IamLoggerLog4j2Impl extends Logger implements IamLogger{
+class IamLoggerLog4j2Impl extends Logger implements IamLogger{
 
 	/**
 	 * @param context

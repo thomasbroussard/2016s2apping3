@@ -8,7 +8,7 @@
         
         <!-- patternLayout will produce -->
          <!-- 2014-11-24 10:45:52,082 - [thread_name] DEBUG: MyClass: MyMessage -->
-        <Property name="patternLayout">%d{ISO8601} [%t] %-5p - %logger{9.9..} --- %m%n</Property>
+        <Property name="patternLayout">%d{ISO8601} [%t] %-5p - %logger{9.9.3*.} --- %m%n</Property>
    
         <!-- More on patterns here: http://logging.apache.org/log4j/2.0/manual/layouts.html#PatternLayout -->
     </Properties>
