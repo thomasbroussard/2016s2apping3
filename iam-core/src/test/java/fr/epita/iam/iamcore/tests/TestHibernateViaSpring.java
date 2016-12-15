@@ -58,7 +58,7 @@ public class TestHibernateViaSpring {
 		identity.setDisplayName("Thomas");
 		session.save(identity);
 		
-		//Comment s'assurer que l'objet est bien passé en base?s
+		//Comment s'assurer que l'objet est bien passé en base?
 	}
 	
 	//@Test
