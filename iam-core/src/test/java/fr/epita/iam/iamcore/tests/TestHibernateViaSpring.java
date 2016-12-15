@@ -3,6 +3,9 @@
  */
 package fr.epita.iam.iamcore.tests;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
@@ -11,6 +14,7 @@ import javax.sql.DataSource;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,15 +54,37 @@ public class TestHibernateViaSpring {
 		Assert.assertNotNull(ds);
 		LOGGER.info(ds.getConnection().getSchema());
 	}
+	
+	@After
+	public void tearDown(){
+		sf.close();
+	}
 
 	@Test
 	public void testSessionFactory() throws SQLException{
+		
+		//Given = Hypothèse
 		Session session = sf.openSession();
 		Identity identity = new Identity();
 		identity.setDisplayName("Thomas");
+		
+		//When = action à tester
 		session.save(identity);
 		
-		//Comment s'assurer que l'objet est bien passé en base?
+		//Then = Vérification que l'action s'est bien produite
+		Connection connection = ds.getConnection();
+		PreparedStatement pstmt = connection.prepareStatement("select * from IDENTITIES");
+		ResultSet rs = pstmt.executeQuery();
+		Assert.assertEquals(1,rs.getFetchSize());
+		rs.next();
+		String fetchedDisplayName = rs.getString("displayName");
+		Assert.assertEquals("Thomas",fetchedDisplayName);
+		LOGGER.info("fetched displayName : {}", fetchedDisplayName);
+		
+		pstmt.close();
+		connection.close();
+		session.close();
+	
 	}
 	
 	//@Test
