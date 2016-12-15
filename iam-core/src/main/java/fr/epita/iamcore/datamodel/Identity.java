@@ -3,11 +3,22 @@
  */
 package fr.epita.iamcore.datamodel;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * @author tbrou
  *
  */
+
+@Entity
 public class Identity {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	
 	private String displayName;
 

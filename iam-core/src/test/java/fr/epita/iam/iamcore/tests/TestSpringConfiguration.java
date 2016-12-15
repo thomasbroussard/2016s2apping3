@@ -3,17 +3,18 @@
  */
 package fr.epita.iam.iamcore.tests;
 
+import javax.inject.Inject;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.epita.iam.iamlog.IamLogManager;
 import fr.epita.iam.iamlog.IamLogger;
 import fr.epita.iamcore.datamodel.Identity;
+import fr.epita.iamcore.services.dao.IdentityDAO;
 
 /**
  * @author tbrou
@@ -26,9 +27,12 @@ public class TestSpringConfiguration {
 	
 	private IamLogger logger = IamLogManager.getIamLogger(TestSpringConfiguration.class);
 	
-	@Autowired
-	@Qualifier("identitySample")
+	@Inject
+//	@Qualifier("identitySample")
 	private Identity identity;
+	
+	@Inject
+	private IdentityDAO dao;
 	
 	@Test
 	public void TestSpring(){
@@ -37,6 +41,13 @@ public class TestSpringConfiguration {
 		logger.debug("valeur du displayName : {}", identity.getDisplayName());
 	}
 
+	
+	@Test
+	public void TestDAOViaSpring(){
+		Assert.assertNotNull(dao);
+	}
+	
+	
 	
 	
 }

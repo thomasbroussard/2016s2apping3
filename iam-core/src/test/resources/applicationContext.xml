@@ -8,5 +8,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
   <bean id="identitySample" class="fr.epita.iamcore.datamodel.Identity">
     <property name="displayName"><value>Thomas Broussard</value></property>
   </bean>
+  
+  <bean id="identityDAO" class="fr.epita.iamcore.services.dao.impl.IdentityJPADAO" />
  
 </beans>
