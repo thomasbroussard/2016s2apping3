@@ -28,7 +28,6 @@ public class TestSpringConfiguration {
 	private IamLogger logger = IamLogManager.getIamLogger(TestSpringConfiguration.class);
 	
 	@Inject
-//	@Qualifier("identitySample")
 	private Identity identity;
 	
 	@Inject

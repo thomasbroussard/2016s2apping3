@@ -9,13 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.sql.DataSource;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -35,29 +35,33 @@ import fr.epita.iamcore.services.dao.IdentityDAO;
 @ContextConfiguration(locations={"/applicationContext.xml"})
 public class TestHibernateViaSpring {
 	
+	//hack pour fermer la session factory
+	private static SessionFactory globalsf;
+	
+	
 	@Inject
 	DataSource ds;
 	
 	@Inject
 	SessionFactory sf;
 	
-	
 	@Inject
-	@Named("identityDAO")
 	private IdentityDAO dao;
 	
 	private static final IamLogger LOGGER = IamLogManager.getIamLogger(TestHibernateViaSpring.class);
 	
 	
+	@Before
+	public void setUp(){
+		if (globalsf == null){
+			globalsf = sf;
+		}
+	}
+	
 	@Test
 	public void testDataSource() throws SQLException{
 		Assert.assertNotNull(ds);
 		LOGGER.info(ds.getConnection().getSchema());
-	}
-	
-	@After
-	public void tearDown(){
-		sf.close();
 	}
 
 	@Test
@@ -87,7 +91,8 @@ public class TestHibernateViaSpring {
 	
 	}
 	
-	//@Test
+	
+	@Test
 	public void testConfiguration(){
 		Identity identity = new Identity();
 		identity.setDisplayName("Thomas");
@@ -95,4 +100,9 @@ public class TestHibernateViaSpring {
 		
 	}
 
+	
+	@AfterClass
+	public static void tearDownGlobal(){
+		globalsf.close();
+	}
 }
