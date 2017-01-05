@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<script type="text/javascript" src="js/identity.js" />
+	<title>create</title>
+</h:head>
+
+<h:body>
+	<div id="message"></div>
+	<!-- <form action="Create" method="post"> -->
+	<div id="form">
+
+		<h:form>
+			<h:outputLabel value="#{indexPageForm.message}"></h:outputLabel>
+
+
+			<table>
+				<tr>
+					<td>first name:</td>
+					<td><h:inputText name="fname" type="text" value="#{indexPageForm.name}"></h:inputText></td>
+				</tr>
+				<tr>
+					<td>last name :</td>
+					<td><h:inputText name="lname" type="text"></h:inputText></td>
+				</tr>
+				<tr>
+					<td>birth date</td>
+					<td><h:inputText name="date" type="date"></h:inputText></td>
+				</tr>
+
+			</table>
+
+			<h:commandButton action="#{indexPageForm.next}" value="Submit data" ></h:commandButton>
+		</h:form>
+	</div>
+
+</h:body>
+
+</html>
