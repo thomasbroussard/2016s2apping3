@@ -3,15 +3,21 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>Create</servlet-name>
-  	<display-name>Create</display-name>
-  	<description>Servlet permettant la création d'identité</description>
-  	<servlet-class>fr.epita.iam.web.actions.Create</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>Create</servlet-name>
-  	<url-pattern>/Create</url-pattern>
-  </servlet-mapping>
+	<display-name>Archetype Created Web Application</display-name>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>Create</servlet-name>
+		<display-name>Create</display-name>
+		<description>Servlet permettant la création d'identité</description>
+		<servlet-class>fr.epita.iam.web.actions.Create</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Create</servlet-name>
+		<url-pattern>/Create</url-pattern>
+	</servlet-mapping>
+
+
 </web-app>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+
+	<bean id="identitySample" class="fr.epita.iamcore.datamodel.Identity">
+		<property name="displayName">
+			<value>Thomas Broussard</value>
+		</property>
+	</bean>
+
+	<bean id="identityDAO" class="fr.epita.iamcore.services.dao.impl.IdentityJPADAO">
+	   <property name="sf" ref="sessionFactory"></property>
+	</bean>
+
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		id="dataSourceBean">
+		<property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
+		<property name="url" value="jdbc:derby://localhost/testDS;create=true" />
+		<property name="username" value="root" />
+		<property name="password" value="password" />
+	</bean>
+
+	<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean"
+		id="hibernateProperties">
+		<property name="properties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.DerbyTenSevenDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceBean" />
+		<property name="hibernateProperties" ref="hibernateProperties" />
+		<property name="packagesToScan">
+			<list>
+				<value>fr.epita.iamcore.datamodel</value>
+			</list>
+		</property>
+	</bean>
+
+
+
+
+
+</beans>

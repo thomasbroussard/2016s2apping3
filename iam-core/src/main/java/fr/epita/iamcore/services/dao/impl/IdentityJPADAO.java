@@ -64,4 +64,18 @@ public class IdentityJPADAO implements IdentityDAO {
 		return null;
 	}
 
+	/**
+	 * @return the sf
+	 */
+	public final SessionFactory getSf() {
+		return sf;
+	}
+
+	/**
+	 * @param sf the sf to set
+	 */
+	public final void setSf(SessionFactory sf) {
+		this.sf = sf;
+	}
+
 }
